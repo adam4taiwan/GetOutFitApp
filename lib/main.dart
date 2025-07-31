@@ -86,14 +86,16 @@ class _MyAppState extends State<MyApp> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
-        body: IndexedStack(
-          // 使用 IndexedStack 保持頁面狀態
+        body: IndexedStack( // 使用 IndexedStack 保持頁面狀態
           index: _selectedIndex,
           children: _widgetOptions,
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: '首頁'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: '首頁',
+            ),
             BottomNavigationBarItem(
               icon: Icon(Icons.dry_cleaning), // 👗
               label: '穿搭',
@@ -139,26 +141,20 @@ class HomeScreen extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Color(0xFFEDE7F6),
-            Color(0xFFE3F2FD),
-          ], // from-purple-100 to-blue-100
+          colors: [Color(0xFFEDE7F6), Color(0xFFE3F2FD)], // from-purple-100 to-blue-100
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
       ),
       child: Center(
-        child: SingleChildScrollView(
-          // 允許內容滾動
+        child: SingleChildScrollView( // 允許內容滾動
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Card(
                 elevation: 8,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                 margin: const EdgeInsets.only(bottom: 24),
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),
@@ -177,18 +173,12 @@ class HomeScreen extends StatelessWidget {
                       user != null
                           ? Text(
                               '哈囉, ${user['name']}！準備好今天的穿搭了嗎？',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.grey[700],
-                              ),
+                              style: TextStyle(fontSize: 18, color: Colors.grey[700]),
                               textAlign: TextAlign.center,
                             )
                           : Text(
                               '請登入以獲得個人化體驗！',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.grey[700],
-                              ),
+                              style: TextStyle(fontSize: 18, color: Colors.grey[700]),
                               textAlign: TextAlign.center,
                             ),
                     ],
@@ -197,32 +187,15 @@ class HomeScreen extends StatelessWidget {
               ),
               GridView.count(
                 shrinkWrap: true, // 讓 GridView 根據內容自動調整高度
-                physics:
-                    const NeverScrollableScrollPhysics(), // 禁用 GridView 自身的滾動
+                physics: const NeverScrollableScrollPhysics(), // 禁用 GridView 自身的滾動
                 crossAxisCount: 2,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
                 children: const [
-                  FeatureCard(
-                    title: '每日穿搭建議',
-                    description: '根據天氣和您的偏好提供每日穿搭建議。',
-                    icon: Icons.wb_sunny,
-                  ),
-                  FeatureCard(
-                    title: '幸運顏色',
-                    description: '查看您今天的幸運顏色，讓您好運一整天！',
-                    icon: Icons.emoji_events,
-                  ),
-                  FeatureCard(
-                    title: '我的衣櫃',
-                    description: '管理您的衣物清單，輕鬆搭配。',
-                    icon: Icons.checkroom,
-                  ),
-                  FeatureCard(
-                    title: '拍照搭配',
-                    description: '使用相機拍攝衣物，AI 幫您分析搭配。',
-                    icon: Icons.camera_alt,
-                  ),
+                  FeatureCard(title: '每日穿搭建議', description: '根據天氣和您的偏好提供每日穿搭建議。', icon: Icons.wb_sunny),
+                  FeatureCard(title: '幸運顏色', description: '查看您今天的幸運顏色，讓您好運一整天！', icon: Icons.emoji_events),
+                  FeatureCard(title: '我的衣櫃', description: '管理您的衣物清單，輕鬆搭配。', icon: Icons.checkroom),
+                  FeatureCard(title: '拍照搭配', description: '使用相機拍攝衣物，AI 幫您分析搭配。', icon: Icons.camera_alt),
                 ],
               ),
             ],
@@ -244,10 +217,7 @@ class OutfitsScreen extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Color(0xFFFCE4EC),
-            Color(0xFFFFEBEE),
-          ], // from-pink-100 to-red-100
+          colors: [Color(0xFFFCE4EC), Color(0xFFFFEBEE)], // from-pink-100 to-red-100
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -276,13 +246,12 @@ class OutfitsScreen extends StatelessWidget {
                     )
                   : GridView.builder(
                       padding: const EdgeInsets.all(16.0),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, // 兩列
-                            crossAxisSpacing: 16.0,
-                            mainAxisSpacing: 16.0,
-                            childAspectRatio: 0.7, // 調整卡片長寬比
-                          ),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // 兩列
+                        crossAxisSpacing: 16.0,
+                        mainAxisSpacing: 16.0,
+                        childAspectRatio: 0.7, // 調整卡片長寬比
+                      ),
                       itemCount: outfits.length,
                       itemBuilder: (context, index) {
                         return OutfitCard(outfit: outfits[index]);
@@ -335,10 +304,7 @@ class _LuckyColorScreenState extends State<LuckyColorScreen> {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Color(0xFFFFF9C4),
-            Color(0xFFE8F5E9),
-          ], // from-yellow-100 to-green-100
+          colors: [Color(0xFFFFF9C4), Color(0xFFE8F5E9)], // from-yellow-100 to-green-100
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -392,10 +358,7 @@ class _LuckyColorScreenState extends State<LuckyColorScreen> {
             const SizedBox(height: 24),
             Text(
               '您的幸運顏色是：',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.grey[800],
-              ), // text-2xl
+              style: TextStyle(fontSize: 20, color: Colors.grey[800]), // text-2xl
             ),
             Text(
               _colorName,
@@ -408,10 +371,7 @@ class _LuckyColorScreenState extends State<LuckyColorScreen> {
             const SizedBox(height: 8),
             Text(
               '穿上它，今天一定好運連連！',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[600],
-              ), // text-lg
+              style: TextStyle(fontSize: 16, color: Colors.grey[600]), // text-lg
             ),
           ],
         ),
@@ -456,10 +416,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Color(0xFFE3F2FD),
-            Color(0xFFE0F7FA),
-          ], // from-blue-100 to-cyan-100
+          colors: [Color(0xFFE3F2FD), Color(0xFFE0F7FA)], // from-blue-100 to-cyan-100
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -483,20 +440,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
             _weather != null
                 ? Card(
                     elevation: 8,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     child: Padding(
                       padding: const EdgeInsets.all(32.0),
                       child: Column(
                         children: [
                           Text(
                             _weather!['city']!,
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[700],
-                            ),
+                            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.grey[700]),
                           ),
                           const SizedBox(height: 16),
                           Text(
@@ -506,36 +457,23 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           const SizedBox(height: 16),
                           Text(
                             _weather!['temperature']!,
-                            style: TextStyle(
-                              fontSize: 48,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[900],
-                            ),
+                            style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.grey[900]),
                           ),
                           const SizedBox(height: 8),
                           Text(
                             _weather!['condition']!,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.grey[600],
-                            ),
+                            style: TextStyle(fontSize: 20, color: Colors.grey[600]),
                           ),
                           const SizedBox(height: 16),
                           Text(
                             _weather!['description']!,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey[500],
-                            ),
+                            style: TextStyle(fontSize: 16, color: Colors.grey[500]),
                             textAlign: TextAlign.center,
                           ),
                           const SizedBox(height: 16),
                           Text(
                             '根據天氣，建議穿著輕便透氣的衣物。',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[500],
-                            ),
+                            style: TextStyle(fontSize: 14, color: Colors.grey[500]),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -646,10 +584,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _handleSaveProfile() {
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    authNotifier.setUser({
-      'name': _nameController.text,
-      'email': _emailController.text,
-    });
+    authNotifier.setUser({'name': _nameController.text, 'email': _emailController.text});
     _showCustomMessage('個人資料已儲存！');
   }
 
@@ -661,10 +596,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Color(0xFFF5F5F5),
-            Color(0xFFEEEEEE),
-          ], // from-gray-100 to-gray-200
+          colors: [Color(0xFFF5F5F5), Color(0xFFEEEEEE)], // from-gray-100 to-gray-200
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -688,9 +620,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Card(
                 elevation: 8,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: Padding(
                   padding: const EdgeInsets.all(32.0),
@@ -706,8 +636,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             prefixIcon: const Icon(Icons.person),
                           ),
-                          onChanged: (text) =>
-                              _nameController.text = text, // 更新控制器文本
+                          onChanged: (text) => _nameController.text = text, // 更新控制器文本
                         ),
                         const SizedBox(height: 16),
                         TextField(
@@ -729,22 +658,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             foregroundColor: Colors.white, // text-white
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                30,
-                              ), // rounded-full
+                              borderRadius: BorderRadius.circular(30), // rounded-full
                             ),
-                            minimumSize: const Size(
-                              double.infinity,
-                              0,
-                            ), // w-full
+                            minimumSize: const Size(double.infinity, 0), // w-full
                             elevation: 4,
                           ),
                           child: const Text(
                             '儲存個人資料',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -755,22 +676,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             foregroundColor: Colors.white, // text-white
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                30,
-                              ), // rounded-full
+                              borderRadius: BorderRadius.circular(30), // rounded-full
                             ),
-                            minimumSize: const Size(
-                              double.infinity,
-                              0,
-                            ), // w-full
+                            minimumSize: const Size(double.infinity, 0), // w-full
                             elevation: 4,
                           ),
                           child: const Text(
                             '登出',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ] else ...[
@@ -781,22 +694,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             foregroundColor: Colors.white, // text-white
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                30,
-                              ), // rounded-full
+                              borderRadius: BorderRadius.circular(30), // rounded-full
                             ),
-                            minimumSize: const Size(
-                              double.infinity,
-                              0,
-                            ), // w-full
+                            minimumSize: const Size(double.infinity, 0), // w-full
                             elevation: 4,
                           ),
                           child: const Text(
                             '登入',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
@@ -838,10 +743,7 @@ class _CameraScreenState extends State<CameraScreen> {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Color(0xFFEEEEEE),
-            Color(0xFFE0E0E0),
-          ], // from-gray-200 to-gray-300
+          colors: [Color(0xFFEEEEEE), Color(0xFFE0E0E0)], // from-gray-200 to-gray-300
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -864,19 +766,13 @@ class _CameraScreenState extends State<CameraScreen> {
             const SizedBox(height: 24),
             Card(
               elevation: 8,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
               margin: const EdgeInsets.symmetric(horizontal: 16),
               child: Padding(
                 padding: const EdgeInsets.all(32.0),
                 child: Column(
                   children: [
-                    const Icon(
-                      Icons.camera_alt,
-                      size: 64,
-                      color: Colors.grey,
-                    ), // 📸
+                    const Icon(Icons.camera_alt, size: 64, color: Colors.grey), // 📸
                     const SizedBox(height: 16),
                     Text(
                       _message,
@@ -889,23 +785,15 @@ class _CameraScreenState extends State<CameraScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.purple[500], // bg-purple-500
                         foregroundColor: Colors.white, // text-white
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 16,
-                          horizontal: 24,
-                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            30,
-                          ), // rounded-full
+                          borderRadius: BorderRadius.circular(30), // rounded-full
                         ),
                         elevation: 4,
                       ),
                       child: const Text(
                         '啟動相機',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -943,16 +831,13 @@ class FeatureCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 6, // shadow-md
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ), // rounded-xl
-      child: InkWell(
-        // 提供點擊效果
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)), // rounded-xl
+      child: InkWell( // 提供點擊效果
         onTap: () {
           // TODO: 點擊後導航到相應功能頁面
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text('點擊了 $title 功能！')));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('點擊了 $title 功能！')),
+          );
         },
         borderRadius: BorderRadius.circular(16),
         child: Padding(
@@ -975,10 +860,7 @@ class FeatureCard extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 description,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey[600],
-                ), // text-sm
+                style: TextStyle(fontSize: 14, color: Colors.grey[600]), // text-sm
                 textAlign: TextAlign.center,
               ),
             ],
@@ -998,16 +880,13 @@ class OutfitCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 6, // shadow-md
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ), // rounded-xl
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)), // rounded-xl
       clipBehavior: Clip.antiAlias, // 確保圖片圓角
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.network(
-            outfit['imageUrl'] ??
-                'https://placehold.co/300x200/E0E0E0/333333?text=穿搭圖片',
+            outfit['imageUrl'] ?? 'https://placehold.co/300x200/E0E0E0/333333?text=穿搭圖片',
             width: double.infinity,
             height: 160, // h-48
             fit: BoxFit.cover,
@@ -1041,18 +920,12 @@ class OutfitCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   outfit['description'] ?? '',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[600],
-                  ), // text-sm
+                  style: TextStyle(fontSize: 14, color: Colors.grey[600]), // text-sm
                 ),
                 const SizedBox(height: 8),
                 Text(
                   '日期: ${outfit['date'] ?? '未知'}',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[500],
-                  ), // text-xs
+                  style: TextStyle(fontSize: 12, color: Colors.grey[500]), // text-xs
                 ),
               ],
             ),
