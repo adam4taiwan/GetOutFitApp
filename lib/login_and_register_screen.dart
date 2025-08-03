@@ -7,8 +7,8 @@ import 'dart:developer' as developer; // For logging
 import 'login_screen.dart';
 // 引入新的頁面檔案
 import 'ai_camera_screen.dart';
-import 'ai_recommendation_screen.dart'; // 這個導入是必需的，因為下面的 _widgetOptions 列表使用了它
-import 'settings_page.dart';
+import 'ai_recommendation_screen.dart';
+import 'settings_screen.dart';
 import 'widgets/outfit_card.dart';
 
 // --- 1. 狀態管理 (使用 ChangeNotifier 和 Provider) ---
@@ -61,7 +61,7 @@ class AuthNotifier extends ChangeNotifier {
 // 穿搭狀態
 class OutfitNotifier extends ChangeNotifier {
   Map<String, dynamic>? _currentOutfit;
-  final List<Map<String, dynamic>> _history = [];
+  final List<Map<String, dynamic>> _history = []; // 修正：宣告為 final
 
   Map<String, dynamic>? get currentOutfit => _currentOutfit;
   List<Map<String, dynamic>> get history => _history;
@@ -137,7 +137,7 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   // 頁面清單
-  static final List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[ // 修正：移除 const
     const HomeScreen(), // 首頁
     const AiRecommendationScreen(), // AI 穿搭建議
     const AICameraScreen(), // AI 相機
@@ -267,7 +267,7 @@ class _AiRecommendationScreenState extends State<AiRecommendationScreen> {
 
     try {
       await Future.delayed(const Duration(seconds: 2));
-
+      
       // 在 await 呼叫之後，檢查 Widget 是否仍然掛載
       if (!mounted) return;
 
@@ -278,7 +278,8 @@ class _AiRecommendationScreenState extends State<AiRecommendationScreen> {
           'activity': activity,
           'title': '休閒$activity 穿搭',
           'description': '舒適的T恤和牛仔褲，搭配運動鞋。',
-          'image': 'https://placehold.co/600x400/000000/FFFFFF?text=Outfit+1',
+          'image':
+              'https://placehold.co/600x400/000000/FFFFFF?text=Outfit+1',
         },
         {
           'id': 'rec2',
@@ -286,7 +287,8 @@ class _AiRecommendationScreenState extends State<AiRecommendationScreen> {
           'activity': activity,
           'title': '時尚$activity 穿搭',
           'description': '俐落的襯衫與卡其褲，搭配皮鞋。',
-          'image': 'https://placehold.co/600x400/000000/FFFFFF?text=Outfit+2',
+          'image':
+              'https://placehold.co/600x400/000000/FFFFFF?text=Outfit+2',
         },
         {
           'id': 'rec3',
@@ -294,7 +296,8 @@ class _AiRecommendationScreenState extends State<AiRecommendationScreen> {
           'activity': activity,
           'title': '正式$activity 穿搭',
           'description': '西裝外套與長褲，搭配正裝鞋。',
-          'image': 'https://placehold.co/600x400/000000/FFFFFF?text=Outfit+3',
+          'image':
+              'https://placehold.co/600x400/000000/FFFFFF?text=Outfit+3',
         },
       ];
       setState(() {
@@ -330,8 +333,7 @@ class _AiRecommendationScreenState extends State<AiRecommendationScreen> {
               border: const OutlineInputBorder(),
               suffixIcon: IconButton(
                 icon: const Icon(Icons.search),
-                onPressed: () =>
-                    _getAIRecommendations(_activityController.text),
+                onPressed: () => _getAIRecommendations(_activityController.text),
               ),
             ),
             onSubmitted: _getAIRecommendations,
@@ -344,8 +346,7 @@ class _AiRecommendationScreenState extends State<AiRecommendationScreen> {
                       child: Column(
                         children: [
                           const Text('AI 推薦穿搭：',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold)),
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                           const SizedBox(height: 16),
                           Expanded(
                             child: ListView.builder(
@@ -367,8 +368,7 @@ class _AiRecommendationScreenState extends State<AiRecommendationScreen> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image.network(
                                             recommendation['image'],
@@ -380,8 +380,7 @@ class _AiRecommendationScreenState extends State<AiRecommendationScreen> {
                                           Text(
                                             recommendation['title'],
                                             style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
+                                                fontSize: 16, fontWeight: FontWeight.bold),
                                           ),
                                           Text(recommendation['description']),
                                         ],
@@ -396,10 +395,8 @@ class _AiRecommendationScreenState extends State<AiRecommendationScreen> {
                           ElevatedButton(
                             onPressed: _selectedRecommendation.isNotEmpty
                                 ? () {
-                                    final selected =
-                                        aiRecommendations.firstWhere((rec) =>
-                                            rec['id'] ==
-                                            _selectedRecommendation);
+                                    final selected = aiRecommendations.firstWhere(
+                                        (rec) => rec['id'] == _selectedRecommendation);
                                     outfitNotifier.setOutfit(selected);
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
